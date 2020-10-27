@@ -100,11 +100,14 @@ class DetailWeatherViewController: UIViewController {
                 showSelectedCity(city: myCurrentCuty)
             }
         } else {
-            Helper.showMessageOffline(vc: self)
+            Helper.showMessageOffline(vc:self)
         }
     }
     
-   
+    @IBAction func goBack(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     fileprivate func showSelectedCity(city: String) {
         ServerManager.sharedManager.getOpenWeatherMapRequestWithCityName(cityName:city,
                                          onSuccess: { (weatherObject) in
@@ -181,7 +184,7 @@ class DetailWeatherViewController: UIViewController {
         if weatherObject.icon != nil {
             DispatchQueue.main.async(execute: {
                 self.iconimgVIew.image = weatherObject.icon
-                self.hud.hide(animated: true)
+                self.hud.hide(animated:true)
             })
         }
     }
